@@ -1,4 +1,4 @@
-
+
 (deffacts datos
 
 	(magico 21)
@@ -9,9 +9,13 @@
 )
 
 (defrule resta
-	?f<-(calculo $?ini ?x ?y $?fin)
+	?f<-(calculo $?ini ?x ?y $?fin magic 0)
 	(test (> ?x ?y) ) 
 	=>
-	(assert (calculo $?fin magic 0))
-	(printout t "resta" crlf)	
+	
+	(assert (calculo $?ini $?fin (- ?x ?y) magic 0))
+	(printout t "resta " ?x " - " ?y " = " (- ?x ?y) crlf)
+	(retract ?x)
+	(retract ?y)
+		
 )
