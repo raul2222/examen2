@@ -9,13 +9,19 @@
 )
 
 (defrule resta
-	?f<-(calculo $?ini ?x ?y $?fin magic 0)
+	?f<-(calculo $?ini ?x $?inter ?y $?fin magic 0)
 	(test (> ?x ?y) ) 
 	=>
 	
-	(assert (calculo $?ini $?fin (- ?x ?y) magic 0))
+	(assert (calculo $?ini $?inter $?fin (- ?x ?y) magic 0))
 	(printout t "resta " ?x " - " ?y " = " (- ?x ?y) crlf)
-	(retract ?x)
-	(retract ?y)
+	(retract ?f)
 		
+)
+
+( defrule meta
+	(calculo $?fin magic 1)
+	=>
+	(printout t "Llegaste a 21" crlf)
+
 )
